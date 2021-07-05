@@ -30,12 +30,11 @@ namespace ijunior.Tests
 
             var weapon = new Weapon(damage, bulletsCount);
             var bot = new Bot(weapon);
-            var player = new Player(Int32.MaxValue);
+            var health = new Health(int.MaxValue);
+            var player = new Player(health);
 
             for (int i = 0; i < bulletsCount + 1; i++)
-            {
                 bot.OnSeePlayer(player);
-            }
         }
     }
 }

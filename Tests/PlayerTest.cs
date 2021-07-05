@@ -9,25 +9,20 @@ namespace ijunior.Tests
         [Test]
         public void CreatePlayer()
         {
-            var player = new Player(100);
+            var health = new Health(100);
+            var player = new Player(health);
         }
 
         [Test]
-        public void CreateDeadPlayer()
+        public void CreatePlayerWithoutHealth()
         {
-            Assert.Catch<ArgumentOutOfRangeException>((() => new Player(0)));
-        }
-
-        [Test]
-        public void CreatePlayerWithNegativeHealth()
-        {
-            Assert.Catch<ArgumentOutOfRangeException>((() => new Player(-100)));
+            Assert.Catch<ArgumentNullException>((() => new Player(null)));
         }
 
         [Test]
         public void Damage()
         {
-            const int health = 10;
+            var health = new Health(10);
             var player = new Player(health);
             player.Damage(5);
         }
@@ -35,41 +30,44 @@ namespace ijunior.Tests
         [Test]
         public void DamageAllHealth()
         {
-            const int health = 10;
+            const int maxHealth = 10;
+            var health = new Health(10);
             var player = new Player(health);
 
             var playerIsDied = false;
             player.Die += () => playerIsDied = true;
 
-            player.Damage(health);
+            player.Damage(maxHealth);
             Assert.AreEqual(true, playerIsDied);
         }
 
         [Test]
         public void DamageAfterDie()
         {
-            const int health = 10;
+            const int maxHealth = 10;
+            var health = new Health(maxHealth);
             var player = new Player(health);
 
             var playerIsDied = false;
             player.Die += () => playerIsDied = true;
 
-            player.Damage(health);
+            player.Damage(maxHealth);
             Assert.AreEqual(true, playerIsDied);
 
-            Assert.Catch<InvalidOperationException>(() => player.Damage(health));
+            Assert.Catch<InvalidOperationException>(() => player.Damage(maxHealth));
         }
 
         [Test]
         public void DamageMoreHaveHealth()
         {
-            const int health = 10;
+            const int maxHealth = 10;
+            var health = new Health(maxHealth);
             var player = new Player(health);
 
             var playerIsDied = false;
             player.Die += () => playerIsDied = true;
 
-            player.Damage(health + 1);
+            player.Damage(maxHealth + 1);
             Assert.AreEqual(true, playerIsDied);
         }
     }

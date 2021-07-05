@@ -43,7 +43,7 @@ namespace ijunior.Tests
             const int bulletsCount = 10;
 
             var weapon = new Weapon(damage, bulletsCount);
-            var player = new Player(int.MaxValue);
+            var player = new Player(new Health(int.MaxValue));
 
             for (int i = 0; i < bulletsCount; i++)
             {
@@ -58,7 +58,7 @@ namespace ijunior.Tests
             const int bulletsCount = 10;
 
             var weapon = new Weapon(damage, bulletsCount);
-            var player = new Player(int.MaxValue);
+            var player = new Player(new Health(int.MaxValue));
 
             for (int i = 0; i < bulletsCount; i++)
             {

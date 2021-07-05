@@ -4,5 +4,6 @@
     &lt;TestId&gt;NUnit3x::F0A44FC8-9E88-418F-B47F-0D651730C7EE::.NETCoreApp,Version=v3.1::ijunior.Tests.PlayerTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F0A44FC8-9E88-418F-B47F-0D651730C7EE::.NETCoreApp,Version=v3.1::ijunior.Tests.WeaponTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::F0A44FC8-9E88-418F-B47F-0D651730C7EE::.NETCoreApp,Version=v3.1::ijunior.Tests.BotTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::F0A44FC8-9E88-418F-B47F-0D651730C7EE::.NETCoreApp,Version=v3.1::ijunior.Tests.HealthTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

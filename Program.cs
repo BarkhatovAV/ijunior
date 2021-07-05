@@ -8,7 +8,7 @@ namespace ijunior
     {
         private static async Task Main(string[] args)
         {
-            var player = new Player(100);
+            var player = new Player(new Health(100));
             player.Die += () => Console.Write($"the player died");
 
             var bots = new List<Bot>
