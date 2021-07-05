@@ -1,35 +1,37 @@
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
 
-# Created by https://www.toptal.com/developers/gitignore/api/rider,dotnetcore,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=rider,dotnetcore,visualstudiocode
+# Visual Studio Code
+.vscode
 
-### DotnetCore ###
-# .NET Core build folders
-bin/
-obj/
+# Rider
+.idea
 
-# Common node modules locations
-/node_modules
-/wwwroot/node_modules
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
-### Rider ###
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
 
-# User-specific stuff
-.idea/
-
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
-
-# Local History for Visual Studio Code
-.history/
-
-### VisualStudioCode Patch ###
-# Ignore all local history of files
-.history
-.ionide
+# Visual Studio 2015
+.vs/
