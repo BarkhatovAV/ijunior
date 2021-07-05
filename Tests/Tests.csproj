@@ -6,15 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Tests\**" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+      <PackageReference Include="NUnit" Version="3.13.2" />
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Remove="Tests\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="Tests\**" />
+      <ProjectReference Include="..\ijunior.csproj" />
     </ItemGroup>
 
 </Project>
