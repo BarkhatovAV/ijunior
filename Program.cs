@@ -1,12 +1,21 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ijunior
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var player = new Player(100);
+            var bots = new List<Bot>
+            {
+                new Bot(new Weapon(2, 10)),
+                new Bot(new Weapon(10, 2))
+            };
+            bots[0].OnSeePlayer(player);
+            await Task.Delay(100);
+            bots[1].OnSeePlayer(player);
         }
     }
 }
