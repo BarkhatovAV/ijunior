@@ -5,19 +5,13 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
-
     <ItemGroup>
-      <Compile Remove="Tests\**" />
+      <ProjectReference Include="..\ijunior.csproj" />
     </ItemGroup>
 
-
     <ItemGroup>
-      <EmbeddedResource Remove="Tests\**" />
-    </ItemGroup>
-
-
-    <ItemGroup>
-      <None Remove="Tests\**" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+      <PackageReference Include="NUnit" Version="3.13.2" />
     </ItemGroup>
 
 </Project>
