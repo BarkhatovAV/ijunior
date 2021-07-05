@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ijunior
@@ -8,11 +9,18 @@ namespace ijunior
         private static async Task Main(string[] args)
         {
             var player = new Player(100);
+            player.Die += () => Console.Write($"the player died");
+
             var bots = new List<Bot>
             {
                 new Bot(new Weapon(2, 10)),
-                new Bot(new Weapon(10, 2))
+                new Bot(new Weapon(50, 2))
             };
+
+            bots[0].OnSeePlayer(player);
+            await Task.Delay(100);
+            bots[1].OnSeePlayer(player);
+            await Task.Delay(100);
             bots[0].OnSeePlayer(player);
             await Task.Delay(100);
             bots[1].OnSeePlayer(player);
