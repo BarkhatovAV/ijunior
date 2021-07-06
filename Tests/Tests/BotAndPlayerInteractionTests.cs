@@ -13,8 +13,7 @@ namespace ijunior.Tests
 
             var weapon = new Weapon(damage, bulletsCount);
             var bot = new Bot(weapon);
-            var health = new Health(damage * bulletsCount);
-            var player = new Player(health);
+            var player = new Player(damage * bulletsCount);
 
             var playerIsDied = false;
             player.Die += () => playerIsDied = true;
@@ -35,8 +34,7 @@ namespace ijunior.Tests
 
             var weapon = new Weapon(damage, bulletsCount);
             var bot = new Bot(weapon);
-            var health = new Health(damage * bulletsCount + 1);
-            var player = new Player(health);
+            var player = new Player(damage * bulletsCount + 1);
 
             var playerIsDied = false;
             player.Die += () => playerIsDied = true;
@@ -57,8 +55,7 @@ namespace ijunior.Tests
 
             var weapon = new Weapon(damage, bulletsCount);
             var bot = new Bot(weapon);
-            var health = new Health(damage);
-            var player = new Player(health);
+            var player = new Player(damage);
 
             bot.OnSeePlayer(player);
             Assert.Catch<InvalidOperationException>(() => bot.OnSeePlayer(player));
