@@ -4,6 +4,8 @@ namespace ijunior
 {
     public class Weapon
     {
+        private const int BulletsPerShot = 1;
+
         public Weapon(int damage, int bullets)
         {
             if (damage <= 0)
@@ -25,13 +27,15 @@ namespace ijunior
         {
             if (damageable == null)
                 throw new ArgumentNullException(nameof(damageable));
-            if (Bullets <= 0)
+            if (HaveAmmoToShoot() == false)
                 throw new InvalidOperationException("Out of bullets");
             damageable.Damage(Damage);
-            Bullets -= 1;
+            Bullets = CountOfBulletsAfterShoot();
             BulletsChanged?.Invoke(Bullets);
         }
 
-        public bool HaveAmmo() => Bullets > 0;
+        public bool HaveAmmoToShoot() => CountOfBulletsAfterShoot() >= 0;
+
+        private int CountOfBulletsAfterShoot() => Bullets - BulletsPerShot;
     }
 }
