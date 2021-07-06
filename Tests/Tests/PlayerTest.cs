@@ -6,70 +6,63 @@ namespace ijunior.Tests
     [TestFixture]
     public class PlayerTest
     {
-        [Test]
-        public void CreatePlayer()
+        [SetUp]
+        public void Setup()
         {
-            var player = new Player(100);
+            _player = new Player(Health);
         }
+
+        private const int Health = 10;
+        
+        private Player _player;
 
         [Test]
         public void CreateDeadPlayer()
         {
-            Assert.Catch<ArgumentOutOfRangeException>((() => new Player(0)));
+            Assert.Catch<ArgumentOutOfRangeException>(() => new Player(0));
         }
 
         [Test]
         public void CreatePlayerWithNegativeHealth()
         {
-            Assert.Catch<ArgumentOutOfRangeException>((() => new Player(-100)));
+            Assert.Catch<ArgumentOutOfRangeException>(() => new Player(-100));
         }
 
         [Test]
         public void Damage()
         {
-            const int health = 10;
-            var player = new Player(health);
-            player.Damage(5);
+            _player.Damage(5);
         }
 
         [Test]
         public void DamageAllHealth()
         {
-            const int health = 10;
-            var player = new Player(health);
-
             var playerIsDied = false;
-            player.Die += () => playerIsDied = true;
+            _player.Died += () => playerIsDied = true;
 
-            player.Damage(health);
+            _player.Damage(Health);
             Assert.AreEqual(true, playerIsDied);
         }
 
         [Test]
         public void DamageAfterDie()
         {
-            const int health = 10;
-            var player = new Player(health);
-
             var playerIsDied = false;
-            player.Die += () => playerIsDied = true;
+            _player.Died += () => playerIsDied = true;
 
-            player.Damage(health);
+            _player.Damage(Health);
             Assert.AreEqual(true, playerIsDied);
 
-            Assert.Catch<InvalidOperationException>(() => player.Damage(health));
+            Assert.Catch<InvalidOperationException>(() => _player.Damage(Health));
         }
 
         [Test]
         public void DamageMoreHaveHealth()
         {
-            const int health = 10;
-            var player = new Player(health);
-
             var playerIsDied = false;
-            player.Die += () => playerIsDied = true;
+            _player.Died += () => playerIsDied = true;
 
-            player.Damage(health + 1);
+            _player.Damage(Health + 1);
             Assert.AreEqual(true, playerIsDied);
         }
     }

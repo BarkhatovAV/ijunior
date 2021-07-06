@@ -4,28 +4,26 @@ namespace ijunior
 {
     public class Player : IDamageable
     {
-        private int _health;
-
         public Player(int health)
         {
             if (health <= 0)
                 throw new ArgumentOutOfRangeException(nameof(health));
-            _health = health;
+            Health = health;
         }
 
-        public int Health => _health;
+        public int Health { get; private set; }
 
         public void Damage(int amount)
         {
             if (Health <= 0)
                 throw new InvalidOperationException();
 
-            _health = Math.Clamp(Health - amount, 0, int.MaxValue);
+            Health = Math.Clamp(Health - amount, 0, int.MaxValue);
 
             if (Health == 0)
-                Die?.Invoke();
+                Died?.Invoke();
         }
 
-        public event Action Die;
+        public event Action Died;
     }
 }

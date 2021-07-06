@@ -6,77 +6,63 @@ namespace ijunior.Tests
     [TestFixture]
     public class WeaponTest
     {
-        [Test]
-        public void CreateWeapon()
+        [SetUp]
+        public void Setup()
         {
-            var weapon = new Weapon(10, 10);
+            _weapon = new Weapon(Damage, BulletsCount);
+            _player = new Player(int.MaxValue);
         }
+        
+        private const int Damage = 10;
+        private const int BulletsCount = 10;
+
+        private Weapon _weapon;
+        private IDamageable _player;
 
         [Test]
         public void CreateEmptyWeapon()
         {
-            Assert.Catch<ArgumentOutOfRangeException>(() => new Weapon(10, 0));
+            Assert.Catch<ArgumentOutOfRangeException>(() => new Weapon(Damage, 0));
         }
 
         [Test]
         public void CreateWeaponWithNegativeAmmo()
         {
-            Assert.Catch<ArgumentOutOfRangeException>(() => new Weapon(10, -100));
+            Assert.Catch<ArgumentOutOfRangeException>(() => new Weapon(Damage, -BulletsCount));
         }
 
         [Test]
         public void CreateWeaponWithoutDamage()
         {
-            Assert.Catch<ArgumentOutOfRangeException>(() => new Weapon(0, 10));
+            Assert.Catch<ArgumentOutOfRangeException>(() => new Weapon(0, BulletsCount));
         }
 
         [Test]
         public void CreateWeaponWithNegativeDamage()
         {
-            Assert.Catch<ArgumentOutOfRangeException>(() => new Weapon(0, 10));
+            Assert.Catch<ArgumentOutOfRangeException>(() => new Weapon(-Damage, BulletsCount));
         }
 
         [Test]
         public void ShootAllAmmo()
         {
-            const int damage = 10;
-            const int bulletsCount = 10;
-
-            var weapon = new Weapon(damage, bulletsCount);
-            var player = new Player(int.MaxValue);
-
-            for (int i = 0; i < bulletsCount; i++)
-            {
-                weapon.Fire(player);
-            }
+            for (int i = 0; i < BulletsCount; i++)
+                _weapon.Fire(_player);
         }
 
         [Test]
         public void ShootMoreAmmoThanTheirIs()
         {
-            const int damage = 10;
-            const int bulletsCount = 10;
+            for (int i = 0; i < BulletsCount; i++)
+                _weapon.Fire(_player);
 
-            var weapon = new Weapon(damage, bulletsCount);
-            var player = new Player(int.MaxValue);
-
-            for (int i = 0; i < bulletsCount; i++)
-            {
-                weapon.Fire(player);
-            }
-
-            Assert.Catch<InvalidOperationException>(() => weapon.Fire(player));
+            Assert.Catch<InvalidOperationException>(() => _weapon.Fire(_player));
         }
 
         [Test]
         public void ShootToEmpty()
         {
-            const int damage = 10;
-            const int bulletsCount = 10;
-
-            var weapon = new Weapon(damage, bulletsCount);
-
-            Assert.Catch<ArgumentNullException>(() => weapon.Fire(null));
+            Assert.Catch<ArgumentNullException>(() => _weapon.Fire(null));
         }
     }
 }

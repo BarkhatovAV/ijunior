@@ -5,23 +5,30 @@ namespace ijunior.Tests
 {
     public class BotAndPlayerInteractionTests
     {
+        private const int Damage = 10;
+        private const int BulletCount = 10;
+
+        private Bot _bot;
+        private Player _player;
+        private Weapon _weapon;
+
+        private void Setup(int damage, int bulletCount, int health)
+        {
+            _weapon = new Weapon(damage, bulletCount);
+            _bot = new Bot(_weapon);
+            _player = new Player(health);
+        }
+
         [Test]
         public void PlayerDied()
         {
-            const int damage = 10;
-            const int bulletsCount = 10;
-
-            var weapon = new Weapon(damage, bulletsCount);
-            var bot = new Bot(weapon);
-            var player = new Player(damage * bulletsCount);
+            Setup(Damage, BulletCount, Damage * BulletCount);
 
             var playerIsDied = false;
-            player.Die += () => playerIsDied = true;
+            _player.Died += () => playerIsDied = true;
 
-            for (int i = 0; i < bulletsCount; i++)
-            {
-                bot.OnSeePlayer(player);
-            }
+            for (int i = 0; i < BulletCount; i++)
+                _bot.OnSeePlayer(_player);
 
             Assert.AreEqual(true, playerIsDied);
         }
@@ -29,20 +36,13 @@ namespace ijunior.Tests
         [Test]
         public void PlayerNotDied()
         {
-            const int damage = 10;
-            const int bulletsCount = 10;
-
-            var weapon = new Weapon(damage, bulletsCount);
-            var bot = new Bot(weapon);
-            var player = new Player(damage * bulletsCount + 1);
+            Setup(Damage, BulletCount, Damage * BulletCount + 1);
 
             var playerIsDied = false;
-            player.Die += () => playerIsDied = true;
+            _player.Died += () => playerIsDied = true;
 
-            for (int i = 0; i < bulletsCount; i++)
-            {
-                bot.OnSeePlayer(player);
-            }
+            for (int i = 0; i < BulletCount; i++)
+                _bot.OnSeePlayer(_player);
 
             Assert.AreEqual(false, playerIsDied);
         }
@@ -50,15 +50,10 @@ namespace ijunior.Tests
         [Test]
         public void ShootToDiedPlayer()
         {
-            const int damage = 10;
-            const int bulletsCount = 10;
+            Setup(Damage, BulletCount, Damage);
 
-            var weapon = new Weapon(damage, bulletsCount);
-            var bot = new Bot(weapon);
-            var player = new Player(damage);
-
-            bot.OnSeePlayer(player);
-            Assert.Catch<InvalidOperationException>(() => bot.OnSeePlayer(player));
+            _bot.OnSeePlayer(_player);
+            Assert.Catch<InvalidOperationException>(() => _bot.OnSeePlayer(_player));
         }
     }
 }

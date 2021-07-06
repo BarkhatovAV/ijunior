@@ -6,15 +6,20 @@ namespace ijunior.Tests
     [TestFixture]
     public class BotTest
     {
-        [Test]
+        [SetUp]
         public void CreateBot()
         {
-            const int damage = 10;
-            const int bulletsCount = 10;
-
-            var weapon = new Weapon(damage, bulletsCount);
-            var bot = new Bot(weapon);
+            _weapon = new Weapon(Damage, BulletsCount);
+            _bot = new Bot(_weapon);
+            _player = new Player(int.MaxValue);
         }
+
+        private const int Damage = 10;
+        private const int BulletsCount = 10;
+
+        private Weapon _weapon;
+        private Bot _bot;
+        private Player _player;
 
         [Test]
         public void CreateBotWithoutWeapon()
@@ -25,17 +30,8 @@ namespace ijunior.Tests
         [Test]
         public void UseMoreAmmunitionThanBotHave()
         {
-            const int damage = 10;
-            const int bulletsCount = 10;
-
-            var weapon = new Weapon(damage, bulletsCount);
-            var bot = new Bot(weapon);
-            var player = new Player(Int32.MaxValue);
-
-            for (int i = 0; i < bulletsCount + 1; i++)
-            {
-                bot.OnSeePlayer(player);
-            }
+            for (int i = 0; i < BulletsCount + 1; i++)
+                _bot.OnSeePlayer(_player);
         }
     }
 }

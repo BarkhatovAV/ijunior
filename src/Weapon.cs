@@ -4,8 +4,6 @@ namespace ijunior
 {
     public class Weapon
     {
-        private int _bullets;
-
         public Weapon(int damage, int bullets)
         {
             if (damage <= 0)
@@ -17,19 +15,11 @@ namespace ijunior
             Bullets = bullets;
         }
 
-        public int Bullets
-        {
-            get => _bullets;
-            private set
-            {
-                _bullets = value;
-                BulletCountChanged?.Invoke(_bullets);
-            }
-        }
+        public int Bullets { get; private set; }
 
         public int Damage { get; }
 
-        public event Action<int> BulletCountChanged;
+        public event Action<int> BulletsChanged;
 
         public void Fire(IDamageable damageable)
         {
@@ -39,6 +29,7 @@ namespace ijunior
                 throw new InvalidOperationException("Out of bullets");
             damageable.Damage(Damage);
             Bullets -= 1;
+            BulletsChanged?.Invoke(Bullets);
         }
 
         public bool HaveAmmo() => Bullets > 0;
