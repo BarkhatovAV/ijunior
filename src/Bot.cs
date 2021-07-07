@@ -1,4 +1,6 @@
 ﻿using System;
+using ijunior.Reasons;
+using ijunior.Weapons;
 
 namespace ijunior
 {
@@ -15,8 +17,12 @@ namespace ijunior
         {
             if (player == null)
                 throw new ArgumentNullException(nameof(player));
-            if (_weapon.HaveAmmo())
+
+            Reason reasonToFire = _weapon.CanFire();
+            if (reasonToFire)
                 _weapon.Fire(player);
+            else
+                reasonToFire.Visit(_weapon);
         }
     }
 }

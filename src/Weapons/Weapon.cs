@@ -1,8 +1,9 @@
 ﻿using System;
+using ijunior.Reasons;
 
-namespace ijunior
+namespace ijunior.Weapons
 {
-    public class Weapon
+    public class Weapon : IWeapon, IWeaponVisitor
     {
         private const int BulletsPerShot = 1;
 
@@ -27,8 +28,8 @@ namespace ijunior
         {
             if (damageable == null)
                 throw new ArgumentNullException(nameof(damageable));
-            if (HaveAmmo() == false)
-                throw new InvalidOperationException("Out of bullets");
+            if (CanFire() == false)
+                throw new InvalidOperationException(CanFire().ToString());
 
             damageable.Damage(Damage);
             Bullets -= BulletsPerShot;
@@ -36,6 +37,19 @@ namespace ijunior
             BulletsChanged?.Invoke(Bullets);
         }
 
-        public bool HaveAmmo() => Bullets - BulletsPerShot >= 0;
+        public Reason CanFire() =>
+            Bullets - BulletsPerShot >= 0
+                ? (Reason) new AllRightReason()
+                : new NotHaveAmmoReason();
+
+        public void Visit(NotHaveAmmoReason reason)
+        {
+            Reload();
+        }
+
+        private void Reload()
+        {
+            Bullets = BulletsPerShot * 10;
+        }
     }
 }

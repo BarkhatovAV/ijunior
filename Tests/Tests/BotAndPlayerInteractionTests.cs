@@ -1,4 +1,5 @@
 ﻿using System;
+using ijunior.Weapons;
 using NUnit.Framework;
 
 namespace ijunior.Tests
