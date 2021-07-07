@@ -12,7 +12,7 @@ namespace ijunior.Tests
             _weapon = new Weapon(Damage, BulletsCount);
             _player = new Player(int.MaxValue);
         }
-        
+
         private const int Damage = 10;
         private const int BulletsCount = 10;
 

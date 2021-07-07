@@ -13,7 +13,7 @@ namespace ijunior.Tests
         }
 
         private const int Health = 10;
-        
+
         private Player _player;
 
         [Test]

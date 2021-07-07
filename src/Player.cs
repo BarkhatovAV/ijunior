@@ -4,6 +4,8 @@ namespace ijunior
 {
     public class Player : IDamageable
     {
+        public event Action Died;
+
         public Player(int health)
         {
             if (health <= 0)
@@ -23,7 +25,5 @@ namespace ijunior
             if (Health == 0)
                 Died?.Invoke();
         }
-
-        public event Action Died;
     }
 }

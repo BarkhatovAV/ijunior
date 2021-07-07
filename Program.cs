@@ -9,7 +9,7 @@ namespace ijunior
         private static async Task Main(string[] args)
         {
             var player = new Player(100);
-            player.Died += () => Console.Write($"the player died");
+            player.Died += () => Console.Write("the player died");
 
             var bots = new List<Bot>
             {

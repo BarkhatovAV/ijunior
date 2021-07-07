@@ -15,7 +15,7 @@ namespace ijunior
         {
             if (player == null)
                 throw new ArgumentNullException(nameof(player));
-            if (_weapon.HaveAmmoToShoot())
+            if (_weapon.HaveAmmo())
                 _weapon.Fire(player);
         }
     }
